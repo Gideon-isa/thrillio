@@ -3,18 +3,18 @@
  */
 package com.semantics.thrillio.manger;
 
-import com.semantics.thrillio.entities.Book;
-import com.semantics.thrillio.entities.Movie;
-import com.semantics.thrillio.entities.WebLink;
+import com.semantics.thrillio.dao.BookmarkDao;
+import com.semantics.thrillio.entities.*;
 
 public class BookmarkManager {
     private static BookmarkManager instance = new BookmarkManager();
+    private static BookmarkDao dao = new BookmarkDao();
 
     // constructor
     private BookmarkManager() {}
 
     /**
-     * BookmarkManager
+     * BookmarkManager return the bookmarkManager instance
      * @return BookmarkManager
      */
     public static BookmarkManager getInstance() {
@@ -90,5 +90,21 @@ public class BookmarkManager {
         webLink.setHost(host);
 
         return webLink;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public Bookmark[][] getBookmarks() {
+        return dao.getBookmarks();
+    }
+
+    public void saveUserBookmark(User user, Bookmark bookmark) {
+        UserBookmark userBookmark = new UserBookmark();
+        userBookmark.setUser(user);
+        userBookmark.setBookmark(bookmark);
+
+        dao.saveUserBookmark(userBookmark);
     }
 }

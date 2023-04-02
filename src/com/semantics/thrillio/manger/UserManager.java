@@ -3,17 +3,22 @@
  */
 package com.semantics.thrillio.manger;
 
+import com.semantics.thrillio.dao.UserDao;
 import com.semantics.thrillio.entities.User;
 
 public class UserManager {
+    // instance of the class
     private static UserManager instance =  new UserManager();
 
-    // Implementing the Singleton Pattern
+    // instance of the class UserDao
+    private static UserDao dao = new UserDao();
+
+    // IMPLEMENTING THE SINGLETON PATTERN
+
     // using the private constructor to prevent instantiation of this class
     private UserManager() {}
 
     // making it static method to access it without instantiation of the class
-
     /**
      * UserManager provides the global point for accessing the UserManger class
      * @return UserManager
@@ -45,6 +50,14 @@ public class UserManager {
 
         return user;
 
+    }
+
+    /**
+     *
+     * @return User[]
+     */
+    public User[] getUsers() {
+        return dao.getUser();
     }
 
 }
